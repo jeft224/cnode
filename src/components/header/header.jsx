@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import './header.scss';
+import logo from '../../assets/images/logo.png';
 class CHeader extends Component {
   
   render(){
@@ -7,7 +8,9 @@ class CHeader extends Component {
         <div className="header__logo">
           <i className="header__logo--menu iconfont icon-menu" />
           <i className="header__logo--back iconfont icon-fanhui" />
-          <img src="https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="" />
+          <div className="header__box--logo">
+            <img src={logo} alt="logo" className="header__logo--img" />
+          </div>
         </div>
       </header>;
   }

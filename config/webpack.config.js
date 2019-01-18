@@ -275,6 +275,7 @@ module.exports = function(webpackEnv) {
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
+        // 排除导入的问题
         new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
       ],
     },
@@ -316,6 +317,7 @@ module.exports = function(webpackEnv) {
             // "url" loader works like "file" loader except that it embeds assets
             // smaller than specified limit in bytes as data URLs to avoid requests.
             // A missing `test` is equivalent to a match.
+            // /\.scss$/  ,/\.(woff2?|eot|ttf|otf)(\?.*)?$/
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               loader: require.resolve('url-loader'),

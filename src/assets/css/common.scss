@@ -1,3 +1,8 @@
+@import './variables.scss';
+body {
+    font-size: $browser-default-font-size;
+}
+
 .common-toast {
     position: absolute;
     top: 50%;

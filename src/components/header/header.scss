@@ -1,0 +1,21 @@
+@import '../../assets/css/variables.scss';
+.header__logo{
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  @include remCalc(height,60);
+  @include remCalc(margin, 0, 20);
+  .header__logo--menu{
+    font-size: 25px;
+    color: $tab-color;
+ }
+ .header__box--logo{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   .header__logo--img{
+      @include remCalc(width,100);
+      @include remCalc(height,30)
+    }
+ }
+}

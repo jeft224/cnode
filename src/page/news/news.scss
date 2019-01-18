@@ -1,0 +1,22 @@
+@import '../../assets/css/variables.scss';
+.news{
+  background: $home-background;
+  .topics-tab {
+    @include remCalc(padding,10,0);
+    ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .topics-tab__item {
+        // background: red;
+        color: $tab-color;
+        @include remCalc(padding,3,3);
+        @include remCalc(border-radius,3)
+      }
+      .topics-tab--active {
+        color: #fff;
+        background: $tab-backgroud-color;
+      }
+    }
+  }
+}

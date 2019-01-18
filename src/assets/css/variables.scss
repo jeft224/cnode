@@ -1,0 +1,33 @@
+// 浏览器元素字体大小
+$browser-default-font-size: 16px !default;//变量的值可以根据自己需求定义
+$home-background:#fff !default;
+// 紫蓝色 #3fffbf
+$tab-color: #6ac100;
+$tab-backgroud-color: #6ac100;
+
+// 用function实现px转换成rem
+@function pxToRem($px){
+  @return $px / $browser-default-font-size * 1rem;
+}
+
+@mixin font-size($traget) {
+    font-size: $traget;
+    font-size: ($target / $browser-default-font-size) * 1rem;
+}
+
+// 用mixin实现px转换成rem
+@mixin remCalc($property, $values...) {
+  $pxValues: '';
+  $remValues: '';
+  $baseFontSize: strip-units($browser-default-font-size) ;
+  @each $value in $values {
+    $pxValues: #{$pxValues + ' ' + $value}px;
+    $remValues: #{$remValues + ' ' + $value/$baseFontSize}rem;
+  }
+  #{$property}: $pxValues;
+  #{$property}: $remValues;
+}
+
+@function strip-units($number) {
+  @return $number/($number* 0 + 1)
+}
