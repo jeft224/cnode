@@ -1,0 +1,66 @@
+@import '../../assets/css/variables.scss';
+
+.news-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #0000001a;
+  width: 100%;
+  height: 70px;
+  @include remCalc(padding,10,10);
+  .user-avatar {
+    width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+      @include remCalc(width,40);
+      @include remCalc(height,40);
+      border-radius: 5px;
+      // @include remCalc(border-radius,)
+    }
+  }
+  .topic_title_wrapper{
+     flex: 4;
+     width: 100%;
+     overflow: hidden;
+     padding-left: 10px;
+     p{
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: nowrap;
+       width: 98%;
+       text-align: left;
+     }
+     .topic_title_name{
+       color:#9cdc4e;
+       font-size: 16px;
+       .flag{
+        margin-right: 8px;
+        background-color: #e5e5e5;
+        @include remCalc(padding,2,5);
+        border-radius: 5px;
+        color: #a5a5a5;
+        font-size: 14px;
+        // @include remCalc(margin-left,5);
+       }
+       .top{
+        color: #fff;
+        background-color: #6ac100;
+       }
+     }
+     .topic_title_view{
+      font-size: 13px;
+      padding-top: 10px;
+      padding-left: 45px;
+      position: relative;
+      color: #9c9c9c;
+      .viewed{
+        color: #9e83cc;
+      }
+      .date {
+        float: right;
+      }
+     }
+  }
+}
