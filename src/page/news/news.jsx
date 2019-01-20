@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewsList from '../../components/newsList';
+import NewsList from '../../components/newslist';
 import classNames from 'classnames';
 import './news.scss';
 
@@ -20,7 +20,7 @@ class News extends Component {
     tab:'all'
   }
   changeTab = (index) => {
-    console.log(index)
+    console.log(this.itemTab[index].type);
     this.setState({
       tabIndex:index,
       tab:this.itemTab[index].type

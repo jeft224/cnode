@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './header.scss';
 import logo from '../../assets/images/logo.png';
+import AsideMenu from '../menu/menu';
 class CHeader extends Component {
   
   render(){
@@ -12,7 +13,7 @@ class CHeader extends Component {
             <img src={logo} alt="logo" className="header__logo--img" />
           </div>
         </div>
-      </header>;
+      </header>
   }
 
 }

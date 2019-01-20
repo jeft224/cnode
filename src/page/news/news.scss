@@ -2,6 +2,7 @@
 .news{
   background: $home-background;
   .topics-tab {
+    background: #f6f6f6;
     @include remCalc(padding,10,0);
     ul {
       display: flex;
