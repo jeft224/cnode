@@ -1,10 +1,19 @@
-import React, { Component } from 'react';
-import UserAvatar from '../../assets/images/user_img.jpg';
-import './menu.scss';
+import React, { Component } from "react";
+import UserAvatar from "../../assets/images/user_img.jpg";
+import "./menu.scss";
+import classNames from 'classnames';
 class AsideMenu extends Component {
+  closeMenu = () => {
+    this.props.setMenuShowStatus()
+  }
   render() {
+    const { isMenuShow } = this.props;
+    const showClass = classNames({
+      showMenu: isMenuShow,
+      asideMenu:true
+    })
     return (
-      <div className="asideMenu">
+      <div className={showClass}>
         <div className="menu">
           <div className="user">
             <div className="user-avatar">
@@ -16,15 +25,28 @@ class AsideMenu extends Component {
           </div>
           <div className="user-infos">
             <ul>
-              <li>我的消息</li>
-              <li>发布话题</li>
-              <li>个人中心</li>
-              <li>关于</li>
+              <li className="user-infos__item">
+                <i className="icon-msg" />
+                我的消息
+              </li>
+              <li className="user-infos__item">
+                <i className="icon-user" />
+                个人中心
+              </li>
+              <li className="user-infos__item">
+                <i className="icon-topics" />
+                发布话题
+              </li>
+              <li className="user-infos__item">
+                <i className="icon-about" />
+                关于
+              </li>
             </ul>
           </div>
         </div>
+        <div className="mask" onClick={this.closeMenu} />
       </div>
-    )
+    );
   }
 }
 

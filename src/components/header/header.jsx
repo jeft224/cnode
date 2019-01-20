@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import './header.scss';
 import logo from '../../assets/images/logo.png';
-import AsideMenu from '../menu/menu';
+
 class CHeader extends Component {
-  
-  render(){
-    return <header>
+  showMenu = () => {
+    this.props.setMenuShowStatus();
+  };
+  render() {
+    return (
+      <header>
         <div className="header__logo">
-          <i className="header__logo--menu iconfont icon-menu" />
+          <i className="header__logo--menu iconfont icon-menu" onClick ={this.showMenu}/>
           <i className="header__logo--back iconfont icon-fanhui" />
           <div className="header__box--logo">
             <img src={logo} alt="logo" className="header__logo--img" />
           </div>
         </div>
       </header>
+    );
   }
-
 }
 
 export default CHeader;
