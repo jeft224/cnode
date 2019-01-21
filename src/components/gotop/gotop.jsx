@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Message extends Component {
+
+export default class GoTop extends Component {
+  state = {  }
   render() {
     return (
       <div>
-        消息中心
+        GoTop
       </div>
-    )
+    );
   }
 }
-
-export default Message;

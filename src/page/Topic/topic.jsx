@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Message extends Component {
-  render() {
+class Topic extends Component {
+  render () {
     return (
       <div>
-        消息中心
+        postsss
       </div>
     )
   }
 }
 
-export default Message;
+export default Topic;

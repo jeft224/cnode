@@ -14,9 +14,9 @@ class Home extends Component{
   }
   render(){
     return [
-      <CHeader setMenuShowStatus={this.setMenuShowStatus}/>,
-      <AsideMenu isMenuShow ={this.state.isMenuShow} setMenuShowStatus={this.setMenuShowStatus}/>,
-      <News />
+      <CHeader setMenuShowStatus={this.setMenuShowStatus} key="cheader"/>,
+      <AsideMenu isMenuShow ={this.state.isMenuShow} setMenuShowStatus={this.setMenuShowStatus} key="menu"/>,
+      <News key ="news"/>
     ]
   }
 }

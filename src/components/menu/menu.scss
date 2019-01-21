@@ -38,24 +38,32 @@
       }
     }
     .user-infos {
+      flex: 1;
       ul {
         display: flex;
         flex-direction: column;
         align-items: center;
-        flex: 1;
-        .user-infos__item {
+        li.user-infos__item {
           width: 100%;
           height: 50px;
           display: flex;
           padding-left: 50px;
           align-items: center;
           cursor: pointer;
-          i {
+          a{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            line-height: 50px;
+            vertical-align: middle;
+          }
+          a > i,i{
             display: inline-block;
             background-repeat: no-repeat;
             width: 21px;
             height: 21px;
             margin-right: 8px;
+            vertical-align: middle;
           }
           .icon-msg {
             background: url('../../assets/images/reply.png');

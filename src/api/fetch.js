@@ -1,6 +1,6 @@
 // import fetch from 'fetch';
 
-const baseUrl = 'https://cnodejs.org/api/v1';
+// const baseUrl = 'https://cnodejs.org/api/v1';
 // 解析json
 function parseJSON(response) {
   return response.json();
@@ -40,7 +40,7 @@ export default function request(options = {},params = {}) {
   options.headers={
     'Content-Type':'application/json'
   }
-  return fetch(baseUrl + url,options,{credentials: 'include'})
+  return fetch(url,options,{credentials: 'include'})
     .then(checkStatus)
     .then(parseJSON)
     .catch(err => ({err}))

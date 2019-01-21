@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserAvatar from "../../assets/images/user_img.jpg";
 import "./menu.scss";
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 class AsideMenu extends Component {
   closeMenu = () => {
     this.props.setMenuShowStatus()
@@ -12,12 +13,13 @@ class AsideMenu extends Component {
       showMenu: isMenuShow,
       asideMenu:true
     })
-    return (
-      <div className={showClass}>
+    return <div className={showClass}>
         <div className="menu">
           <div className="user">
             <div className="user-avatar">
-              <img src={UserAvatar} alt="头像" />
+              <Link to="/login">
+                <img src={UserAvatar} alt="头像" />
+              </Link>
             </div>
             <div className="user-name">
               <span>点击头像登录</span>
@@ -26,16 +28,22 @@ class AsideMenu extends Component {
           <div className="user-infos">
             <ul>
               <li className="user-infos__item">
-                <i className="icon-msg" />
-                我的消息
+                <Link to="/msg">
+                  <i className="icon-msg" />
+                  我的消息
+                </Link>
               </li>
               <li className="user-infos__item">
-                <i className="icon-user" />
-                个人中心
+                <Link to="/user">
+                  <i className="icon-user" />
+                  个人中心
+                </Link>
               </li>
               <li className="user-infos__item">
-                <i className="icon-topics" />
-                发布话题
+                <Link to="/topic">
+                  <i className="icon-topics" />
+                  发布话题
+                </Link>
               </li>
               <li className="user-infos__item">
                 <i className="icon-about" />
@@ -45,8 +53,7 @@ class AsideMenu extends Component {
           </div>
         </div>
         <div className="mask" onClick={this.closeMenu} />
-      </div>
-    );
+      </div>;
   }
 }
 

@@ -59,6 +59,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
+  "proxy": "https://cnodejs.org/api/v1",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -116,6 +117,7 @@
   },
   "devDependencies": {
     "classnames": "^2.2.6",
-    "moment": "^2.23.0"
+    "moment": "^2.23.0",
+    "react-router-dom": "^4.3.1"
   }
 }
