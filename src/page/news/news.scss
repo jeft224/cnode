@@ -1,8 +1,11 @@
 @import '../../assets/css/variables.scss';
 .news{
   background: $home-background;
+  position: relative;
   .topics-tab {
+    // position: fixed;
     background: #f6f6f6;
+    width:100%;
     @include remCalc(padding,10,0);
     ul {
       display: flex;
