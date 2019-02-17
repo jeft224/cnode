@@ -1,0 +1,59 @@
+@import '../../assets/css/variables.scss';
+
+.login {
+  background-color: #fff;
+  height: 100%;
+  .login_header{
+    height: 50px;
+    background: $tab-color;
+    h2{
+      text-align: center;
+      color: #fff;
+      font-size: 24px;
+      height: 100%;
+    }
+  }
+  .login_form{
+    width: 100%;
+    margin: 45px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input{
+      width: 85%;
+      height: 40px;
+      border-bottom: 1px solid gray;
+      font-size: 1.3rem;
+      padding: 0;
+      outline: none;
+      &:focus{
+        border-bottom: 1px solid $tab-color;
+      }
+    }
+    .btn_check{
+      margin: 30px 0;
+      font-size: 20px;
+      background-color: $tab-color;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      letter-spacing: 3px;
+      outline: none;
+    }
+  }
+  .intro{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 50px;
+    color: gray;
+    ul,li{
+      list-style:disc;
+    }
+    li{
+      padding: 5px 0;
+      font-weight: bold;
+    }
+  }
+}
