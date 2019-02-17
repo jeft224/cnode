@@ -1,0 +1,19 @@
+.detail{
+  position: relative;
+  z-index: 1;
+  height: 100%; 
+  padding: 8px 5px 0;
+  background-color: rgba(0,0,0,.07);
+  overflow-x: hidden; 
+  overflow-y: auto;
+  width:100%;
+  .body{
+    background-color: #fff;
+    height: 100%;
+    border-radius: 4px;
+  }
+  .md{
+    width: 100%;
+    overflow: hidden;
+  }
+}

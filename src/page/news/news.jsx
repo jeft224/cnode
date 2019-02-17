@@ -3,6 +3,8 @@ import NewsList from '../../components/newslist';
 import classNames from 'classnames';
 import './news.scss';
 
+
+
 class News extends Component {
   constructor(props){
     super(props)
@@ -25,6 +27,7 @@ class News extends Component {
       tabIndex:index,
       tab:this.itemTab[index].type
     })
+    console.log(index)
   }
   render() {
     const {tab,tabIndex} = this.state;
@@ -44,13 +47,14 @@ class News extends Component {
                     ? tabClass
                     : "topics-tab__item"
                 }
-                onClick={(e) => this.changeTab(index,e)}
+                onClick={(e) => this.changeTab(index)}
               >
-                {item.title}
+               {item.title}
               </li>
             ))}
           </ul>
         </div>
+       
         <NewsList tab={tab} />
       </div>;
   }

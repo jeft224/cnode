@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './newsitem.scss'
 import classNames from 'classnames';
 import moment from 'moment'
+import { withRouter } from "react-router-dom";
 class NewsItem extends Component {
   constructor(props){
     super(props);
     this.tabObj = { share: "分享", good: "精华", job:"招聘",ask:"问答" };
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
+    // console.log(nextProps)
   }
   componentDidMount(){
     // console.log(this.props.news)
@@ -31,7 +32,7 @@ class NewsItem extends Component {
       flag:true,
       top:(news.top || news.good)
     })
-     return <div className="news-item">
+    return <div className="news-item" onClick={() => this.props.history.push(`/detail/${news.id}`)}>
          <div className="user-avatar">
            <img src={news.author.avatar_url} alt="头像" />
          </div>
@@ -49,4 +50,4 @@ class NewsItem extends Component {
   }
 }
 
-export default NewsItem;
+export default withRouter(NewsItem);

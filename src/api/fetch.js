@@ -15,7 +15,7 @@ function checkStatus(response) {
   throw error;
 }
 
-export default function request(options = {},params = {}) {
+export default function request(options = {},params = null) {
   let {url,data} = options;
   // let url = 
   // get 请求参数

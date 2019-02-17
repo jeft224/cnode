@@ -7,26 +7,40 @@ import request from '../../api/fetch';
 class NewsList extends Component {
   constructor(props) {
     super(props);
-    this.limit = 15;
+    this.limit = 10;
     this.mdrender = true;
+    this.scrollWrapper = React.createRef();
   }
   state = {
     page: 1,
     newsList: [],
     loading: false,
-    isOver:false // 是否全部加载
+    isOver: false // 是否全部加载
   };
-  componentWillReceiveProps(nextProps) {
-    const { tab } = nextProps;
-    if (this.props.tab !== nextProps.tab) {
-      this.getTopics(tab);
+  // getDerivedStateFromProps
+  // componentWillReceiveProps(nextProps) {
+  //   const { tab } = nextProps;
+  //   if (this.props.tab !== nextProps.tab) {
+  //     this.getTopics(tab);
+  //   }
+  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.tab !== prevProps.tab) {
+      this.setState({
+        newsList:[],
+        page:1
+      },()=> {
+        this.getTopics(this.props.tab);
+      })
+      // console.log(this.state.page)
+      
     }
   }
+
   // shouldComponentUpdate(nextProps,nextState){
   //   return nextProps.tab === this.props.tab ? false : true
   // }
-  getTopics = tab => {
-    let that = this;
+  getTopics = async (tab) => {
     const data = {
       tab,
       page: this.state.page,
@@ -36,49 +50,60 @@ class NewsList extends Component {
     this.setState({
       loading: true
     });
-    request(
+    await request(
       {
         url: "/topics",
         method: "GET"
       },
       data
     ).then(res => {
-      that.setState({ newsList: res.data, loading: false });
+      // console.log(res.data)
+      this.setState(preState => ({
+        newsList: preState.newsList.concat(res.data),
+        loading: false
+      }));
+      // this.setState({ newsList: res.data, loading: false });
       // console.log(res);
     });
   };
   componentDidMount() {
+    const that = this;
     const { tab } = this.props;
     this.getTopics(tab);
-    this.refs.scrollWrapper.addEventListener("scroll", () => {
-      console.log(1111)
-      this.setState({
-        page: this.state.page + 1
-      })
-      this.getTopics(tab);
-    }, false)
-  };
-
-  loadMoreFn = () => {
-
+    this.scrollWrapper.current.addEventListener(
+      "scroll",
+      (e) => {
+        const {tab} = that.props;
+        const flag = e.target.clientHeight + e.target.scrollTop ===
+          e.target.scrollHeight;
+        if (flag){
+          this.setState({
+            page: this.state.page + 1
+          });
+          this.getTopics(tab);
+        }
+      },
+      false
+    );
   }
-  scrolledNews = (e) => {
-    
-  }
+
+  loadMoreFn = () => {};
+  scrolledNews = e => {};
   componentWillUnmount() {
-    this.refs.scrollWrapper.addEventListener("scroll",() => {
-
-    },false)
+    this.scrollWrapper.current.removeEventListener("scroll", () => {}, false);
   }
   render() {
     const { newsList, loading } = this.state;
     return (
-      <div className="newslist" ref="scrollWrapper">
+      <div className="newslist" ref={this.scrollWrapper}>
         {loading ? (
           <Loading />
-        ) : ( <div className ="newsA">
-            { newsList.map(item => <NewsItem news={item} key={item.id} />)}
-        </div>
+        ) : (
+          <div className="newsA">
+            {newsList.map(item => (
+              <NewsItem news={item} key={item.id} />
+            ))}
+          </div>
         )}
       </div>
     );

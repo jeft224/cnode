@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CHeader from '../../components/header/header';
 import News from '../News/news';
 import AsideMenu from '../../components/menu/menu';
+
+// import { Route } from "react-router-dom";
 // import './home.scss';
 class Home extends Component{
   state = {
@@ -14,9 +16,9 @@ class Home extends Component{
   }
   render(){
     return [
-      <CHeader setMenuShowStatus={this.setMenuShowStatus} key="cheader"/>,
-      <AsideMenu isMenuShow ={this.state.isMenuShow} setMenuShowStatus={this.setMenuShowStatus} key="menu"/>,
-      <News key ="news"/>
+        <CHeader setMenuShowStatus={this.setMenuShowStatus} key="cheader" />,
+        <AsideMenu isMenuShow={this.state.isMenuShow} setMenuShowStatus={this.setMenuShowStatus} key="menu" />,
+        <News key="news" />
     ]
   }
 }
