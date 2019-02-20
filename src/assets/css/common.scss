@@ -48,3 +48,64 @@ body {
         transform: translate3d(0, 0, 0) scale(0);
     }
 }
+.markdown-text {
+  width: 100%;
+  border-radius: 0 0 4px 4px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  margin-bottom: 10px;
+  background-color: white;
+  li {
+    list-style: none;
+  }
+  img {
+
+    width: 95%;
+  }
+  li, p {
+    text-indent: 1em;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-size: 100%;
+  }
+  h2 {
+    font-size: 98%;
+  }
+  h3 {
+    font-size: 96%;
+  }
+  h4 {
+    font-size: 94%;
+  }
+  h5 {
+    font-size: 92%;
+  }
+  table {
+    width: 100%;
+    // padding: 0 3px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    border-collapse:collapse;
+    th {
+      border: none;
+      background-color: #009688;
+      color: white;
+    }
+    tr:nth-of-type(odd) {
+      background-color: #E0E0E0;
+      border: none;
+
+    }
+    tr:nth-of-type(even) {
+      background-color: #EFEBE9;
+      border: none;
+    }
+    td {
+      max-width: 120px;
+      padding: 0 4px;
+      font-size: 80%;
+      overflow: auto;
+    }
+  }
+}

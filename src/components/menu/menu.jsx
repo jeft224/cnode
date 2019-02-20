@@ -9,6 +9,7 @@ class AsideMenu extends Component {
   }
   render() {
     const { isMenuShow } = this.props;
+    let user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')) ;
     const showClass = classNames({
       showMenu: isMenuShow,
       asideMenu:true
@@ -18,11 +19,11 @@ class AsideMenu extends Component {
           <div className="user">
             <div className="user-avatar">
               <Link to="/login">
-                <img src={UserAvatar} alt="头像" />
+              <img src={user ? user.avatar_url: UserAvatar} alt="头像" />
               </Link>
             </div>
             <div className="user-name">
-              <span>点击头像登录</span>
+            <span>{user ? user.loginname : "点击头像登录"}</span>
             </div>
           </div>
           <div className="user-infos">

@@ -3,28 +3,18 @@ import './newsitem.scss'
 import classNames from 'classnames';
 import moment from 'moment'
 import { withRouter } from "react-router-dom";
+import { changeTime } from '../../utils/getFormatTime';
+
 class NewsItem extends Component {
   constructor(props){
     super(props);
     this.tabObj = { share: "分享", good: "精华", job:"招聘",ask:"问答" };
   }
-  componentWillReceiveProps(nextProps){
-    // console.log(nextProps)
-  }
+  // componentWillReceiveProps(nextProps){
+  //   // console.log(nextProps)
+  // }
   componentDidMount(){
     // console.log(this.props.news)
-  }
-  changeTime = (time) => {
-    return moment(time).startOf('minute').fromNow()
-    .replace(/hours?/, '小时')
-    .replace('ago', '前')
-    .replace(/days?/, '天')
-    .replace(/minutes?/, '分钟')
-    .replace(/\ban?/, '1')
-    .replace(/months?/, '个月')
-    .replace(/\byears?/, '年')
-    .replace(/\s/g, '')
-    .replace('fewseconds', '分钟');
   }
   render() {
     const {news} = this.props;
@@ -43,7 +33,7 @@ class NewsItem extends Component {
            </p>
            <p className="topic_title_view">
              <span className="viewed">{news.reply_count}</span>/{news.visit_count}
-           <span className="date">{this.changeTime(news.create_at)}</span>
+           <span className="date">{changeTime(news.create_at)}</span>
            </p>
          </div>
        </div>;

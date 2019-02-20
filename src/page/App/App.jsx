@@ -9,16 +9,18 @@ import Topic from "../Topic/topic";
 import Details from "../News/newDetail";
 class App extends Component {
   render() {
-    return <Router>
+    return <React.StrictMode>
+        <Router>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/detail" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/msg" component={Msg} />
             <Route path="/user" component={User} />
             <Route path="/topic" component ={Topic}/>
-            <Route path="/detail/:id" component={Details} />
           </Switch>
         </Router>
+    </React.StrictMode>
   }
 }
 

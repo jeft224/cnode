@@ -4,6 +4,23 @@ import NewsItem from '../newsitem';
 import Loading from '../loading';
 import PropTypes from "prop-types";
 import request from '../../api/fetch';
+import { Route } from 'react-router-dom';
+import Details from '../../page/News/newDetail';
+import { AutoSizer,InfiniteLoader, List as VList } from 'react-virtualized';
+
+
+function NewsListT(props) {
+  const {newsList} = props
+  return (
+    <div className="newsA">
+      {newsList.map(item => (
+        <NewsItem news={item} key={item.id} />
+      ))}
+    </div>
+  )
+}
+
+
 class NewsList extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +32,8 @@ class NewsList extends Component {
     page: 1,
     newsList: [],
     loading: false,
-    isOver: false // 是否全部加载
+    isOver: false ,// 是否全部加载
+    remoteRowCount:10,
   };
   // getDerivedStateFromProps
   // componentWillReceiveProps(nextProps) {
@@ -23,6 +41,10 @@ class NewsList extends Component {
   //   if (this.props.tab !== nextProps.tab) {
   //     this.getTopics(tab);
   //   }
+  // }
+  
+  // static getDerivedStateFromProps(props, state){
+  //   console.log(props)
   // }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.tab !== prevProps.tab) {
@@ -36,7 +58,6 @@ class NewsList extends Component {
       
     }
   }
-
   // shouldComponentUpdate(nextProps,nextState){
   //   return nextProps.tab === this.props.tab ? false : true
   // }
@@ -86,25 +107,56 @@ class NewsList extends Component {
       false
     );
   }
-
-  loadMoreFn = () => {};
+  
+  // isRowLoaded = ({ index })=>{
+  //   return !!this.state.newsList[index];
+  // }
+  // loadMoreRows = ({ startIndex, stopIndex }) => {
+  //   console.log(startIndex)
+  //   const { tab } = this.props;
+  //   this.setState({
+  //     page: this.state.page + 1
+  //   });
+  //   this.getTopics(tab);
+  // }
+  
   scrolledNews = e => {};
   componentWillUnmount() {
-    this.scrollWrapper.current.removeEventListener("scroll", () => {}, false);
+    // this.scrollWrapper.current.removeEventListener("scroll", () => {}, false);
   }
   render() {
     const { newsList, loading } = this.state;
+
+    const renderItem = ({ index, key }) => {
+      return <NewsItem news = {newsList[index]} key ={key} />
+    }
     return (
       <div className="newslist" ref={this.scrollWrapper}>
-        {loading ? (
+        {/* {loading ? (
           <Loading />
         ) : (
           <div className="newsA">
             {newsList.map(item => (
               <NewsItem news={item} key={item.id} />
             ))}
+              <InfiniteLoader isRowLoaded={this.isRowLoaded}
+                loadMoreRows={this.loadMoreRows}
+                rowCount={this.state.remoteRowCount}>
+              {
+                  ({ onRowsRendered, registerChild}) => (
+                  <VList width={375} height={750} 
+                      rowCount={this.state.remoteRowCount}
+                      onRowsRendered={onRowsRendered}
+                      ref={registerChild}
+                      rowHeight={100}
+                      rowRenderer={renderItem} />
+                    )
+              }
+            </InfiniteLoader>
           </div>
-        )}
+        )} */}
+        <Route path="/" exact render={() => <NewsListT newsList = {newsList}/>} />
+        <Route path="/detail/:id" component={Details} />
       </div>
     );
   }
