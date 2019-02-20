@@ -33,9 +33,14 @@ export default function request(options = {},params = null) {
   delete options.url
   if(data){
     delete options.data
-    options.body = JSON.stringify({
-      data
-    })
+    // fetch 不对传递表单传递数据做处理
+    // 方法一 不安全 可能后端获取不到数据
+    options.body = JSON.stringify(data)
+
+    // 方法二 新建formData对象，再将数据赋值给formData对象
+    // let formData = new FormData();  
+    // Object.assign(formData,data)
+    // options.body = formData;
   }
   options.headers={
     'Content-Type':'application/json'
