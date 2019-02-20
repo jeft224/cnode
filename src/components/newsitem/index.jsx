@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './newsitem.scss'
 import classNames from 'classnames';
-import moment from 'moment'
 import { withRouter } from "react-router-dom";
 import { changeTime } from '../../utils/getFormatTime';
 

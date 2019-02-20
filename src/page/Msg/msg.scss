@@ -1,0 +1,26 @@
+@import '../../assets/css/variables.scss';
+
+.msg {
+  background-color: #fff;
+  height: 100%;
+  .msg_header{
+    height: 50px;
+    background: $tab-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i{
+      transform: rotate(180deg);
+      color:#fff;
+      font-size: 26px;
+      position: absolute;
+      left: 10px;
+    }
+    h2{
+      text-align: center;
+      color: #fff;
+      font-size: 24px;
+      height: 100%;
+    }
+  }
+}

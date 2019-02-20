@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import request from "../../api/fetch";
 import './detail.scss'
-import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { changeTime } from '../../utils/getFormatTime';
 
