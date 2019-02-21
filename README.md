@@ -6,8 +6,8 @@ In the project directory, you can run:
 
 ### cnode项目进程
 
-[ ] 详情页的回复和评论
-[ ] 列表页的列表转成长列表加载
+- [ ]  详情页的回复和评论
+- [ ]  列表页的列表转成长列表加载
 
 ### `npm start`
 
