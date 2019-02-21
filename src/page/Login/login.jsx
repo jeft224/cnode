@@ -18,12 +18,18 @@ class Login extends Component {
   checkAccessToken =() => {
     const {accesstoken} = this.state;
     request({ url:'/accesstoken',method:'POST',data:{accesstoken}}).then((res) => {
+      localStorage.accesstoken = accesstoken;
       localStorage.setItem('user', JSON.stringify(res));
       this.props.history.push('/user')
     })
   }
   goback = () => {
     this.props.history.go(-1);
+  }
+  componentDidMount() {
+    localStorage.accesstoken && this.setState({
+      accesstoken:localStorage.accesstoken
+    })
   }
   render () {
     const { accesstoken } = this.state;
@@ -40,6 +46,9 @@ class Login extends Component {
 
         <div className="intro">
           <ul>
+            {/* <li>为了更好地体验请先登录<span role="img" aria-label="a">🙂</span></li>
+            <li>请输入CNode账号的Access Token<span role="img" aria-label="b">😂</span></li>
+            <li>在个人中心可以获取Access Token<span role="img" aria-label="c">😊</span></li> */}
             <li>为了更好地体验请先登录🙂</li>
             <li>请输入CNode账号的Access Token😂</li>
             <li>在个人中心可以获取Access Token😊</li>

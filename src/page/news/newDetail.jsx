@@ -11,6 +11,7 @@ class NewDetails extends Component {
     types: { share: '分享', ask: '问答', job: '招聘' },
     replies:[],
     replayStatus:false,
+    currentIndex:null,
   }
   componentDidMount(){
     const id = this.props.match.params.id;
@@ -33,18 +34,19 @@ class NewDetails extends Component {
   goback = () => {
     this.props.history.go(-1);
   }
-  changeReplyStatus = () => {
+  changeReplyStatus = (index) => {
+    console.log(index)
     this.setState({
-      replayStatus:true,
+      currentIndex:index
     })
   }
   cancelReply =() => {
     this.setState({
-      replayStatus: false,
+      currentIndex:null
     })
   }
   render() {
-    const { detail, types, replies,replayStatus} = this.state;
+    const { detail, types, replies, currentIndex} = this.state;
     const content = { __html: detail.content }; 
     return (
       <div className="detail">
@@ -75,7 +77,7 @@ class NewDetails extends Component {
                         <div className="reply_desc">
                           <span className="reply_name">{item.author.loginname}</span>
                           {replies.length - index}楼 • {changeTime(item.create_at)}
-                          <span className="reply_at" onClick={this.changeReplyStatus}>回复</span>
+                          <span className="reply_at" onClick={(e) => this.changeReplyStatus(index,e)}>回复</span>
                           <i className="icon_reply_at"></i>
                           <span className="ups_count">{item.ups.length}</span>
                         </div>
@@ -84,7 +86,7 @@ class NewDetails extends Component {
                     <div className="reply_content" dangerouslySetInnerHTML={{__html:item.content}}>
                     </div>
                     {
-                      replayStatus ? (
+                      (index === currentIndex) ? (
                         <div className="reply_again">
                           <input type="text" placeholder={`@${item.author.loginname}`} />
                           <button>回复</button>

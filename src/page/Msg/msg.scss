@@ -1,26 +1,84 @@
-@import '../../assets/css/variables.scss';
+@import "../../assets/css/variables.scss";
 
 .msg {
   background-color: #fff;
   height: 100%;
-  .msg_header{
+  .msg_header {
     height: 50px;
     background: $tab-color;
     display: flex;
     align-items: center;
     justify-content: center;
-    i{
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+    i {
       transform: rotate(180deg);
-      color:#fff;
+      color: #fff;
       font-size: 26px;
       position: absolute;
       left: 10px;
     }
-    h2{
+    h2 {
       text-align: center;
       color: #fff;
       font-size: 24px;
       height: 100%;
+    }
+  }
+  .msg_tab {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    background-color: $tab-color;
+    color: hsla(0, 0%, 100%, 0.5);
+    .msg_read,
+    .msg_no_read {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .msg_read {
+      border-right: 1px solid hsla(0, 0%, 100%, 0.2);
+    }
+    .selected {
+      border-bottom: 2px solid red;
+      color: #fff;
+    }
+  }
+  .msg_list {
+    width: 100%;
+    .msg-item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      // .msg-avatar {
+      //   width: 50px;
+      //   height: 50px;
+      //   margin-right: 10px;
+      //   img {
+      //     width: 30px;
+      //     height: 30px;
+      //     vertical-align: bottom;
+      //     border-radius: 4px;
+      //   }
+      // }
+      .msg-body {
+        flex: 1;
+        .msg-name {
+          font-size: 1.3rem;
+        }
+        .msg-from {
+          // color: gray;
+          font-size: 80%;
+        }
+      }
+    }
+    .msg-item + .msg-item {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
   }
 }
