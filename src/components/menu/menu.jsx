@@ -1,29 +1,31 @@
-import React, { Component } from "react";
-import UserAvatar from "../../assets/images/user_img.jpg";
-import "./menu.scss";
+import React, { Component } from 'react';
+import './menu.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import UserAvatar from '../../assets/images/user_img.jpg';
+
 class AsideMenu extends Component {
   closeMenu = () => {
-    this.props.setMenuShowStatus()
-  }
+    this.props.setMenuShowStatus();
+  };
   render() {
     const { isMenuShow } = this.props;
-    let user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')) ;
+    const user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'));
     const showClass = classNames({
       showMenu: isMenuShow,
-      asideMenu:true
-    })
-    return <div className={showClass}>
+      asideMenu: true
+    });
+    return (
+      <div className={showClass}>
         <div className="menu">
           <div className="user">
             <div className="user-avatar">
               <Link to="/login">
-              <img src={user ? user.avatar_url: UserAvatar} alt="头像" />
+                <img src={user ? user.avatar_url : UserAvatar} alt="头像" />
               </Link>
             </div>
             <div className="user-name">
-            <span>{user ? user.loginname : "点击头像登录"}</span>
+              <span>{user ? user.loginname : '点击头像登录'}</span>
             </div>
           </div>
           <div className="user-infos">
@@ -54,7 +56,8 @@ class AsideMenu extends Component {
           </div>
         </div>
         <div className="mask" onClick={this.closeMenu} />
-      </div>;
+      </div>
+    );
   }
 }
 

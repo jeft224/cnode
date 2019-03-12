@@ -1,43 +1,48 @@
-import React, { Component } from "react";
-import "./user.scss";
-import request from "../../api/fetch";
-import { changeTime } from '../../utils/getFormatTime';
+import React, { Component } from 'react';
+import './user.scss';
 import { withRouter } from 'react-router-dom';
+import request from '../../api/fetch';
+import changeTime from '../../utils/getFormatTime';
 
 class User extends Component {
   state = {
     user: {},
-    collectTopics:[]
+    collectTopics: [],
   };
-  goback = () => {
-    this.props.history.go(-1);
-  };
-  getTopics = () => {
-    const { loginname } = localStorage.user && JSON.parse(localStorage.user);
-    request({ url: `/topic_collect/${loginname}`}).then(res => {
-      this.setState({
-        collectTopics:res.data
-      })
-    })
-  }
-  getUserInfo = () => {
-    const { loginname } = localStorage.user && JSON.parse(localStorage.user);
-    request({ url: `/user/${loginname}`, method: "GET" }).then(res => {
-      console.log(res);
-      this.setState({
-        user: res.data
-      });
-    });
-  };
+
   componentDidMount() {
     if (!localStorage.user) {
-      this.props.history.push("/login");
+      this.props.history.push('/login');
     }
     this.getUserInfo();
     this.getTopics();
   }
+
+  goback = () => {
+    this.props.history.go(-1);
+  };
+
+  getTopics = () => {
+    const { loginname } = localStorage.user && JSON.parse(localStorage.user);
+    request({ url: `/topic_collect/${loginname}` }).then((res) => {
+      this.setState({
+        collectTopics: res.data,
+      });
+    });
+  }
+
+  getUserInfo = () => {
+    const { loginname } = localStorage.user && JSON.parse(localStorage.user);
+    request({ url: `/user/${loginname}`, method: 'GET' }).then((res) => {
+      console.log(res);
+      this.setState({
+        user: res.data,
+      });
+    });
+  };
+
   render() {
-    const { user, collectTopics} = this.state;
+    const { user, collectTopics } = this.state;
     return (
       <div className="user">
         <div className="user_header">
@@ -50,10 +55,17 @@ class User extends Component {
               <img src={user.avatar_url} alt="" />
             </div>
             <div className="info_name">{user.loginname}</div>
-            <div className="info_score">积分：{user.score}</div>
-            <div className="info_score">Github：<a href={`https://github.com/${user.githubUsername}`}>{user.githubUsername}</a></div>
+            <div className="info_score">
+积分：
+              {user.score}
+            </div>
+            <div className="info_score">
+Github：
+              <a href={`https://github.com/${user.githubUsername}`}>{user.githubUsername}</a>
+            </div>
             <div className="info_date">
-              注册于：{changeTime(user.create_at)}
+              注册于：
+              {changeTime(user.create_at)}
             </div>
           </div>
           <div className="info_collect">
@@ -62,8 +74,8 @@ class User extends Component {
             </div>
             <div className="collect_content">
               {
-                collectTopics.map((item,index)=> (
-                  <div className="collect_item" key ={index}>
+                collectTopics.map((item, index) => (
+                  <div className="collect_item" key={index}>
                     <div className="collect_news_img">
                       <img src={item.author.avatar_url} alt="" />
                     </div>

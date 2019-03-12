@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 export default class GoTop extends Component {
-  state = {  }
+  state = { }
   render() {
     return (
       <div>

@@ -10,7 +10,7 @@ class CHeader extends Component {
     return (
       <header>
         <div className="header__logo">
-          <i className="header__logo--menu iconfont icon-menu" onClick ={this.showMenu}/>
+          <i className="header__logo--menu iconfont icon-menu" onClick={this.showMenu} />
           <i className="header__logo--back iconfont icon-fanhui" />
           <div className="header__box--logo">
             <img src={logo} alt="logo" className="header__logo--img" />

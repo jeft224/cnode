@@ -1,47 +1,57 @@
 import React, { Component } from 'react';
 import './login.scss';
-import request from '../../api/fetch';
 import { withRouter } from 'react-router-dom';
-class Login extends Component {
-  
+import request from '../../api/fetch';
 
+class Login extends Component {
   state = {
-    accesstoken:''
-  }
+    accesstoken: ''
+  };
   // 对input值进行绑定，改变input
-  changeToken =(e) => {
+  changeToken = (e) => {
     this.setState({
-      accesstoken:e.target.value
-    })
-  } 
+      accesstoken: e.target.value
+    });
+  };
   // 验证accessToken登录
-  checkAccessToken =() => {
-    const {accesstoken} = this.state;
-    request({ url:'/accesstoken',method:'POST',data:{accesstoken}}).then((res) => {
+  checkAccessToken = () => {
+    const { accesstoken } = this.state;
+    request({
+      url: '/accesstoken',
+      method: 'POST',
+      data: { accesstoken }
+    }).then((res) => {
       localStorage.accesstoken = accesstoken;
       localStorage.setItem('user', JSON.stringify(res));
-      this.props.history.push('/user')
-    })
-  }
+      this.props.history.push('/user');
+    });
+  };
   goback = () => {
     this.props.history.go(-1);
-  }
+  };
   componentDidMount() {
-    localStorage.accesstoken && this.setState({
-      accesstoken:localStorage.accesstoken
-    })
+    localStorage.accesstoken
+      && this.setState({
+        accesstoken: localStorage.accesstoken
+      });
   }
-  render () {
+  render() {
     const { accesstoken } = this.state;
     return (
       <div className="login">
         <div className="login_header">
-          <i className="iconfont icon-right" onClick={this.goback}></i>
+          <i className="iconfont icon-right" onClick={this.goback} />
           <h2>登录</h2>
         </div>
         <div className="login_form">
-          <input type="text" placeholder="请输入Access Token" value={accesstoken} onChange={this.changeToken}/>
-          <button className="btn_check" onClick={this.checkAccessToken}>验证</button>
+          <input
+            type="text"
+            placeholder="请输入Access Token"
+            value={accesstoken}
+            onChange={this.changeToken} />
+          <button className="btn_check" onClick={this.checkAccessToken}>
+            验证
+          </button>
         </div>
 
         <div className="intro">

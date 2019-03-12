@@ -7,46 +7,47 @@ function parseJSON(response) {
 }
 
 function checkStatus(response) {
-  if(response.status >= 200 && response.status < 500){
-    return response
+  if (response.status >= 200 && response.status < 500) {
+    return response;
   }
-  const error = new Error(response.statusText)
-  error.response = response
+  const error = new Error(response.statusText);
+  error.response = response;
   throw error;
 }
 
-export default function request(options = {},params = null) {
-  let {url,data} = options;
-  // let url = 
+export default function request(options = {}, params = null) {
+  const { data } = options;
+  let { url } = options;
+  // let url =
   // get 请求参数
-  if(params){
-    let paramsArr = []; 
+  if (params) {
+    const paramsArr = [];
 
     Object.keys(params).forEach((key) => {
-      paramsArr.push(key + "=" + params[key])
-    })
-    let gp = url.search(/\?/) === -1 ? '?':'&';
-    url += `${gp}${paramsArr.join('&')}`
+      paramsArr.push(`${key}=${params[key]}`);
+    });
+    const gp = url.search(/\?/) === -1 ? '?' : '&';
+    url += `${gp}${paramsArr.join('&')}`;
   }
-  options = {...options}
+  options = { ...options };
   options.mode = 'cors';
-  delete options.url
-  if(data){
-    delete options.data
+  delete options.url;
+  if (data) {
+    delete options.data;
     // fetch 不对传递表单传递数据做处理
     // 方法一 不安全 可能后端获取不到数据
-    options.body = JSON.stringify(data)
+    options.body = JSON.stringify(data);
 
     // 方法二 新建formData对象，再将数据赋值给formData对象
-    // let formData = new FormData();  
+    // let formData = new FormData();
     // Object.assign(formData,data)
     // options.body = formData;
   }
-  options.headers={
-    'Content-Type':'application/json'
-  }
-  return fetch(url,options,{credentials: 'include'})
+  options.headers = {
+    'Content-Type': 'application/json',
+  };
+  return fetch(url, options, { credentials: 'include' })
     .then(checkStatus)
     .then(parseJSON)
-    .catch(err => ({err}))
+    .catch(err => ({ err }));
 }

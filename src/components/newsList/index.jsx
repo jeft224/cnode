@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import './newslist.scss';
+import PropTypes from 'prop-types';
 import NewsItem from '../newsitem';
-import Loading from '../loading';
-import PropTypes from "prop-types";
+// import Loading from '../loading';
 import request from '../../api/fetch';
-import { Route } from 'react-router-dom';
-import Details from '../../page/News/newDetail';
-import { AutoSizer,InfiniteLoader, List as VList } from 'react-virtualized';
+// import { AutoSizer,InfiniteLoader, List as VList } from 'react-virtualized';
 
 
 function NewsListT(props) {
-  const {newsList} = props
+  const { newsList } = props;
   return (
     <div className="newsA">
-      {newsList.map(item => (
-        <NewsItem news={item} key={item.id} />
+      {newsList.map((item, index) => (
+        <NewsItem news={item} key={index} />
       ))}
     </div>
-  )
+  );
 }
 
 
@@ -32,8 +30,8 @@ class NewsList extends Component {
     page: 1,
     newsList: [],
     loading: false,
-    isOver: false ,// 是否全部加载
-    remoteRowCount:10,
+    isOver: false, // 是否全部加载
+    remoteRowCount: 10
   };
   // getDerivedStateFromProps
   // componentWillReceiveProps(nextProps) {
@@ -49,13 +47,12 @@ class NewsList extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.tab !== prevProps.tab) {
       this.setState({
-        newsList:[],
-        page:1
-      },()=> {
+        newsList: [],
+        page: 1
+      }, () => {
         this.getTopics(this.props.tab);
-      })
+      });
       // console.log(this.state.page)
-      
     }
   }
   // shouldComponentUpdate(nextProps,nextState){
@@ -73,11 +70,11 @@ class NewsList extends Component {
     });
     await request(
       {
-        url: "/topics",
-        method: "GET"
+        url: '/topics',
+        method: 'GET'
       },
       data
-    ).then(res => {
+    ).then((res) => {
       // console.log(res.data)
       this.setState(preState => ({
         newsList: preState.newsList.concat(res.data),
@@ -92,12 +89,12 @@ class NewsList extends Component {
     const { tab } = this.props;
     this.getTopics(tab);
     this.scrollWrapper.current.addEventListener(
-      "scroll",
+      'scroll',
       (e) => {
-        const {tab} = that.props;
-        const flag = e.target.clientHeight + e.target.scrollTop ===
-          e.target.scrollHeight;
-        if (flag){
+        const { tab } = that.props;
+        const flag = e.target.clientHeight + e.target.scrollTop
+          === e.target.scrollHeight;
+        if (flag) {
           this.setState({
             page: this.state.page + 1
           });
@@ -120,16 +117,14 @@ class NewsList extends Component {
   //   this.getTopics(tab);
   // }
   
-  scrolledNews = e => {};
+  scrolledNews = (e) => {};
   componentWillUnmount() {
     // this.scrollWrapper.current.removeEventListener("scroll", () => {}, false);
   }
   render() {
     const { newsList, loading } = this.state;
 
-    const renderItem = ({ index, key }) => {
-      return <NewsItem news = {newsList[index]} key ={key} />
-    }
+    const renderItem = ({ index, key }) => <NewsItem news={newsList[index]} key={key} />;
     return (
       <div className="newslist" ref={this.scrollWrapper}>
         {/* {loading ? (
@@ -155,13 +150,12 @@ class NewsList extends Component {
             </InfiniteLoader>
           </div>
         )} */}
-        <Route path="/" exact render={() => <NewsListT newsList = {newsList}/>} />
-        <Route path="/detail/:id" component={Details} />
+        <NewsListT newsList={newsList} />
       </div>
     );
   }
 }
-NewsList.propTypes ={
-  tab:PropTypes.string
-}
+NewsList.propTypes = {
+  tab: PropTypes.string
+};
 export default NewsList;
